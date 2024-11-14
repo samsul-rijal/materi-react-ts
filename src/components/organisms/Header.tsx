@@ -1,12 +1,14 @@
+import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
-interface HeaderProps {
-    title: string;
-    isLogin: boolean;
-    handleLogout: () => void;
-}
 
-const Header = ({title, isLogin, handleLogout}: HeaderProps) => {
+const Header = () => {
+
+    const authContext = useContext(AuthContext)
+    const isLogin = authContext?.isLogin    
+    const handleLogout = authContext?.handleLogout    
+
 
     const navigate = useNavigate()
 
@@ -15,10 +17,10 @@ const Header = ({title, isLogin, handleLogout}: HeaderProps) => {
     }
 
     return(
-        <div className="flex justify-between px-3">
+        <div className={`flex justify-between px-3`}>
             <h1>Header</h1>
             <div className="flex gap-3">
-                <h3>Haii <span className="text-yellow-600">{title}</span></h3>
+                <h3>Haii <span className="text-yellow-600">Name</span></h3>
                 {
                     isLogin ? 
                     <div>

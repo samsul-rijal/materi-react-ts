@@ -2,24 +2,31 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../components/atoms/Button'
 import FormField from '../components/molecules/FormField'
 import MainTemplate from '../components/templates/MainTemplate'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 function Login() {
 
     const navigate = useNavigate()
-    const [isLogin, setIsLogin] = useState<boolean>(false)
+    const authContext = useContext(AuthContext)
+    const handleLogin = authContext?.handleLogin    
 
-    const handleLogin = () => {
-        setIsLogin(true)
-        navigate('/')
+    const handleLoginAuth = () => {
+        
+        if(handleLogin){
+            console.log('kondisis');
+            
+            handleLogin()
+            navigate('/')
+        }
     }
 
     return (
-        <MainTemplate pageTitle='Login Page' login={isLogin}>
+        <MainTemplate pageTitle='Login Page'>
             <form>
                 <FormField label='Email' type='email' placeholder='masukan email' />
                 <FormField label='Password' type='password' placeholder='masukan password' />
-                <Button text='Login' onClick={handleLogin} />
+                <Button text='Login' onClick={handleLoginAuth} />
             </form>
         </MainTemplate>
     )
