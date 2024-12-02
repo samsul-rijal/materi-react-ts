@@ -4,8 +4,6 @@ interface AuthContexType {
     isLogin: boolean;
     handleLogin: () => void;
     handleLogout: () => void;
-    // user: string;
-    // theme: string | undefined
 }
 
 export const AuthContext = createContext<AuthContexType | undefined>(undefined)
