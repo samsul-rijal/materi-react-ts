@@ -5,6 +5,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
+import TodoApp from './pages/TodoApp';
 
 function App(){
   return(
@@ -19,6 +20,7 @@ function App(){
           {/* yang ada di dalam sini dia outlet nya */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/todo-app" element={<TodoApp />} />
         </Route>
 
       </Routes>
