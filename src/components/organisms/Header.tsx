@@ -45,6 +45,9 @@ const Header = () => {
                     <li>
                         <NavLink to="/todo-app">Todo App</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/users">User List</NavLink>
+                    </li>
                     
                 </ul>
             </div>

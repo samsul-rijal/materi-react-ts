@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import TodoApp from './pages/TodoApp';
+import User from './pages/User';
 
 function App(){
   return(
@@ -21,6 +22,7 @@ function App(){
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/todo-app" element={<TodoApp />} />
+          <Route path="/users" element={<User />} />
         </Route>
 
       </Routes>
