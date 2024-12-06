@@ -1,12 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-interface HeaderProps {
-    title: string;
-    isLogin: boolean;
-    handleLogout: () => void;
-}
 
-const Header = ({title, isLogin, handleLogout}: HeaderProps) => {
+const Header = () => {
+
+    const { isLogin, user, dispatch } = useAuth()
+
 
     const navigate = useNavigate()
 
@@ -15,15 +14,17 @@ const Header = ({title, isLogin, handleLogout}: HeaderProps) => {
     }
 
     return(
-        <div className="flex justify-between px-3">
+        <div className={`flex justify-between px-3`}>
             <h1>Header</h1>
             <div className="flex gap-3">
-                <h3>Haii <span className="text-yellow-600">{title}</span></h3>
                 {
                     isLogin ? 
-                    <div>
-                        <button onClick={handleLogout} className="text-red-500">Logout</button>
-                    </div>
+                    <>
+                        <h3>Haii <span className="text-yellow-600">{user?.name}</span></h3>
+                        <div>
+                            <button onClick={() => dispatch({type: 'LOGOUT'})} className="text-red-500">Logout</button>
+                        </div>
+                    </>
                     :
                     <button onClick={NavigateToLogin} className="text-green-500">Login</button>
                 }
@@ -34,12 +35,24 @@ const Header = ({title, isLogin, handleLogout}: HeaderProps) => {
                             Home
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/about">About</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact">Contact</NavLink>
-                    </li>
+                    {isLogin && 
+                        <>
+                            <li>
+                                <NavLink to="/about">About</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/contact">Contact</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/todo-app">Todo App</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/users">User List</NavLink>
+                            </li>
+                        </>
+                    
+
+                    }
                     
                 </ul>
             </div>

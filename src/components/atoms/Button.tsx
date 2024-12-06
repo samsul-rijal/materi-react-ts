@@ -5,7 +5,7 @@ interface ButtonProps {
 
 function Button({text, onClick}:ButtonProps) {
   return (
-    <button className="rounded p-2 bg-orange-500" onClick={onClick}>{text}</button>
+    <button type="button" className="rounded p-2 bg-orange-500" onClick={onClick}>{text}</button>
   )
 }
 

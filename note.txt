@@ -1,0 +1,10 @@
+TUGAS 
+
+Buat project react dengan materi yang sudah diajarkan
+harus ada 
+- props
+- state
+- routing
+- context
+
+dengan minimal 3 menu, wajib ada private route
