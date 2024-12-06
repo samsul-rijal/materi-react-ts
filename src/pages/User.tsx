@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import MainTemplate from '../components/templates/MainTemplate'
 import axios from 'axios'
+import api from '../utils/api'
 
 interface User {
     id: number
@@ -19,8 +20,8 @@ function User() {
     //   .then(json => setUsers(json.data))
 
     const getUsers = async() => {
-        const response = await axios.get("http://localhost:8000/user")
-        // console.log(response);
+
+        const response = await api.get("/user")
         setUsers(response.data.data)
     }
 

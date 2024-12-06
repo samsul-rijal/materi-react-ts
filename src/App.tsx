@@ -7,8 +7,17 @@ import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import TodoApp from './pages/TodoApp';
 import User from './pages/User';
+import { useVerifyToken } from './hooks/useVerifyToken';
+import { useEffect } from 'react';
 
 function App(){
+
+  const { verifyToken } = useVerifyToken()
+  
+  useEffect(() => {
+    verifyToken()
+  }, [])
+
   return(
     <Router>
       <Routes>

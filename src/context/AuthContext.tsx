@@ -1,39 +1,80 @@
-import { createContext, ReactNode, useState } from "react"
+import { createContext, Dispatch, ReactNode, useContext, useReducer } from "react"
 
-interface AuthContexType {
-    isLogin: boolean;
-    handleLogin: () => void;
-    handleLogout: () => void;
+
+interface User {
+    id: number
+    name: string
+    email: string
 }
 
-export const AuthContext = createContext<AuthContexType | undefined>(undefined)
+interface AuthState {
+    user: User | null
+    isLogin: boolean
+}
 
-interface AuthContextProviderProps {
+// auth type action
+type AuthAction = { type: 'LOGIN'; payload: {user: User; token: string} } 
+                | { type: 'LOGOUT' };
+
+//  initial state
+const initialState: AuthState = {
+    user: null,
+    isLogin: false
+}
+
+// reducer
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
+    switch (action.type) {
+      case 'LOGIN':      
+        localStorage.setItem('token', action.payload.token)
+
+        return {
+            user: action.payload.user,
+            isLogin: true
+        }
+
+      case 'LOGOUT':
+        localStorage.removeItem('token')
+        return {
+            user: null,
+            isLogin: false
+        }
+      default:
+        return state;
+    }
+};
+
+// context type
+interface AuthContextType extends AuthState {
+    dispatch: Dispatch<AuthAction>;
+}
+
+// membuat context
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
+
+// auth procider props
+interface AuthProviderProps {
     children: ReactNode
 }
 
+export const AuthContextProvider = ({children}: AuthProviderProps) => {
 
-export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
+    const [state, dispatch] = useReducer(authReducer, initialState)
 
-    const [isLogin, setIsLogin] = useState<boolean>(Boolean(localStorage.getItem('isLogin')))
-
-
-    const handleLogin = () => {
-        console.log('context jalan');
-        
-        setIsLogin(true)
-        localStorage.setItem('isLogin', 'true')
-    }
-
-    const handleLogout = () => {
-        setIsLogin(false)
-        localStorage.removeItem('isLogin')
-    }
     
     return (
-        <AuthContext.Provider value={{isLogin, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{...state, dispatch}}>
             {children}
         </AuthContext.Provider>
     )
 }
 
+// hook context
+export const useAuth = (): AuthContextType => {
+    const context = useContext(AuthContext)
+    if(!context) {
+        throw new Error('error use context')
+    }
+
+    return context
+}
