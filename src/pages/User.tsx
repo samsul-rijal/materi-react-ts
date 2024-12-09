@@ -2,18 +2,13 @@ import { useEffect, useState } from 'react'
 import MainTemplate from '../components/templates/MainTemplate'
 import axios from 'axios'
 import api from '../utils/api'
+import { User as UserList } from '../types'
 
-interface User {
-    id: number
-    name: string
-    email: string
-    address: string
-}
 
 function User() {
 
     // memiliki 2 tipe, yang pertama null, yang kedua array
-    const [users, setUsers] = useState<User[] | null>(null) 
+    const [users, setUsers] = useState<UserList[] | null>(null) 
 
     // fetch('http://localhost:8000/user')
     //   .then(response => response.json())

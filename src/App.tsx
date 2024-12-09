@@ -9,6 +9,8 @@ import TodoApp from './pages/TodoApp';
 import User from './pages/User';
 import { useVerifyToken } from './hooks/useVerifyToken';
 import { useEffect } from 'react';
+import AddProduct from './pages/AddProduct';
+import Products from './pages/Products';
 
 function App(){
 
@@ -32,6 +34,8 @@ function App(){
           <Route path="/contact" element={<Contact />} />
           <Route path="/todo-app" element={<TodoApp />} />
           <Route path="/users" element={<User />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/add-product" element={<AddProduct />} />
         </Route>
 
       </Routes>
