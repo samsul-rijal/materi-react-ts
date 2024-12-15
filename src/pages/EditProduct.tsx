@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 // import Button from '../components/atoms/Button'
 // import FormField from '../components/molecules/FormField'
 import MainTemplate from '../components/templates/MainTemplate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
 
-function AddProduct() {
+function EditProduct() {
 
     const [form, setForm] = useState({
         name: '',
@@ -14,9 +14,10 @@ function AddProduct() {
         stock: 0,
         image: null,
     })
-    const [isLoading, setIsloading] = useState(false)
 
     const navigate = useNavigate()
+    const {id} = useParams()
+    // console.log(id);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
@@ -35,7 +36,6 @@ function AddProduct() {
 
         try {
             // console.log(form.image);
-            setIsloading(true)
             const uploadData = new FormData();
             uploadData.append('name', form.name)
             uploadData.append('price', form.price.toString())
@@ -44,19 +44,34 @@ function AddProduct() {
                 uploadData.append('image', form.image)
             }
             
-            const response = await api.post('/product', uploadData)
+            const response = await api.patch(`/product/${id}`, uploadData)
             console.log(response);
             navigate('/products')
-            toast.success('Produk berhasil ditambahkan')
-            setIsloading(false)
+            toast.success('Produk berhasil diperbarui')
             
         } catch (error: any) {
             console.log(error);
             toast.error(error.response.data.message)
-            setIsloading(false)
         }
 
     }    
+
+    const getProducts = async() => {
+        
+        try {
+            const response = await api.get(`/product/${id}`)
+            console.log(response);      
+            setForm(response.data.data)
+            
+        } catch (error) {
+            console.log(error);
+                        
+        }
+    }
+    
+    useEffect(() => {
+        getProducts()
+    }, [])
 
     return (
         <MainTemplate pageTitle='Login Page'>
@@ -80,7 +95,7 @@ function AddProduct() {
                         <input type="file" name='image' className='w-full px-4 py-2 rounded' onChange={handleChange} />
                     </div>
                     <div className='mb-4'>
-                        <button className='w-full bg-blue-600 px-4 py-2 rounded text-white'>{isLoading ? 'Loading...': 'Simpan'}</button>
+                        <button className='w-full bg-blue-600 px-4 py-2 rounded text-white'>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -88,4 +103,4 @@ function AddProduct() {
     )
 }
 
-export default AddProduct
+export default EditProduct

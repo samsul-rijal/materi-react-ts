@@ -11,6 +11,7 @@ import { useVerifyToken } from './hooks/useVerifyToken';
 import { useEffect } from 'react';
 import AddProduct from './pages/AddProduct';
 import Products from './pages/Products';
+import EditProduct from './pages/EditProduct';
 
 function App(){
 
@@ -36,6 +37,7 @@ function App(){
           <Route path="/users" element={<User />} />
           <Route path="/products" element={<Products />} />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
         </Route>
 
       </Routes>

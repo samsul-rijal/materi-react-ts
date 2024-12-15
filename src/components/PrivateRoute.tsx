@@ -6,7 +6,8 @@ function PrivateRoute() {
     // const isLogin = authContext?.isLogin    
     // const isLogin = true
     const { isLogin } = useAuth()
-
+  console.log(isLogin);
+  
   return isLogin ? <Outlet /> : <Navigate to='/login' />
 }
 

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 // import Button from '../components/atoms/Button'
 // import FormField from '../components/molecules/FormField'
 import MainTemplate from '../components/templates/MainTemplate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
 import { useAuth } from '../context/AuthContext'
@@ -14,8 +14,10 @@ function Login() {
         password: ''
     })
 
+    const [isLoading, setIsloading] = useState(false)
+
     const navigate = useNavigate()
-    const { dispatch } = useAuth()
+    const { dispatch, isLogin } = useAuth()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({
@@ -34,6 +36,7 @@ function Login() {
 
         try {
             
+            setIsloading(true)
             const response = await api.post('/login', form)
             console.log(response);
             
@@ -47,6 +50,7 @@ function Login() {
                     }
                 })
 
+                setIsloading(false)
                 toast.success('login berhasil!')
                 navigate('/')
             }
@@ -55,6 +59,7 @@ function Login() {
         } catch (error: any) {
             console.log(error);
             toast.error(error.response.data.message)
+            setIsloading(false)
         }
 
     }
@@ -77,7 +82,7 @@ function Login() {
                         <input type="password" name='password' className='w-full px-4 py-2 rounded' onChange={handleChange} />
                     </div>
                     <div className='mb-4'>
-                        <button className='w-full bg-blue-600 px-4 py-2 rounded text-white'>Login</button>
+                        <button disabled={isLoading} className='w-full bg-blue-600 px-4 py-2 rounded text-white'>{isLoading ? 'Loading...' : 'Login'}</button>
                     </div>
                 </form>
             </div>
