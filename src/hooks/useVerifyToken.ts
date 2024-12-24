@@ -25,7 +25,6 @@ export const useVerifyToken = () => {
             } catch (error) {
                 console.log(error);
                 dispatch({type: 'LOGOUT'})
-                
             }
         }
     };

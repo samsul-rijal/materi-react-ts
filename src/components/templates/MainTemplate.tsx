@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../organisms/Header'
 import Footer from '../organisms/Footer'
 import { Helmet } from 'react-helmet'
+import { useAuth } from '../../context/AuthContext';
 
 interface MainTemplateProps {
     children: React.ReactNode;
@@ -9,13 +10,8 @@ interface MainTemplateProps {
     login?: boolean;
 }
 
-function MainTemplate({children, pageTitle, login}: MainTemplateProps) {
+function MainTemplate({children, pageTitle}: MainTemplateProps) {
 
-    const [isLogin, setIsLogin] = useState<boolean>(login || false)
-
-    const handleLogin = () => {
-        setIsLogin(!isLogin)
-    }
 
   return (
     <div>
@@ -24,9 +20,9 @@ function MainTemplate({children, pageTitle, login}: MainTemplateProps) {
         </Helmet>
         <div className='flex flex-col h-screen justify-between'>
             <div>
-                <Header isLogin={isLogin} title="Rey" handleLogout={handleLogin} />
+                <Header />
                 {/* children itu contentnya */}
-                <div className='mt-6'>
+                <div className='mt-28'>
                     {children} 
                 </div>
             </div>

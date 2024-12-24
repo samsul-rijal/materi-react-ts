@@ -5,6 +5,7 @@ interface User {
     id: number
     name: string
     email: string
+    role: string
 }
 
 interface AuthState {
@@ -27,11 +28,10 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     switch (action.type) {
       case 'LOGIN':      
         localStorage.setItem('token', action.payload.token)
-        console.log('jalan');
-        
+        // console.log('jalan');
         return {
             user: action.payload.user,
-            isLogin: true
+            isLogin: true,
         }
 
       case 'LOGOUT':

@@ -5,6 +5,7 @@ import MainTemplate from '../components/templates/MainTemplate'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
+import MainTemplateSeller from '../components/templates/MainTemplateSeller'
 
 function AddProduct() {
 
@@ -46,7 +47,7 @@ function AddProduct() {
             
             const response = await api.post('/product', uploadData)
             console.log(response);
-            navigate('/products')
+            navigate('/seller/product')
             toast.success('Produk berhasil ditambahkan')
             setIsloading(false)
             
@@ -59,9 +60,9 @@ function AddProduct() {
     }    
 
     return (
-        <MainTemplate pageTitle='Login Page'>
+        <MainTemplateSeller pageTitle='Add Product'>
             <div className='flex flex-col items-center min-h-screen'>
-                <h1 className='text-xl my-5 font-semibold'>Product</h1>
+                <h1 className='text-xl my-5 font-semibold'>Add Product</h1>
                 <form onSubmit={handleSubmit} className='w-96 shadow-md p-5 rounded-md'>
                     <div className='mb-4'>
                         <label htmlFor="" className='block text-gray-700 font-medium'>Name</label>
@@ -84,7 +85,7 @@ function AddProduct() {
                     </div>
                 </form>
             </div>
-        </MainTemplate>
+        </MainTemplateSeller>
     )
 }
 

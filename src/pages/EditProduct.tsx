@@ -5,6 +5,7 @@ import MainTemplate from '../components/templates/MainTemplate'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '../utils/api'
+import MainTemplateSeller from '../components/templates/MainTemplateSeller'
 
 function EditProduct() {
 
@@ -46,7 +47,7 @@ function EditProduct() {
             
             const response = await api.patch(`/product/${id}`, uploadData)
             console.log(response);
-            navigate('/products')
+            navigate('/seller/product')
             toast.success('Produk berhasil diperbarui')
             
         } catch (error: any) {
@@ -74,7 +75,7 @@ function EditProduct() {
     }, [])
 
     return (
-        <MainTemplate pageTitle='Login Page'>
+        <MainTemplateSeller pageTitle='Login Page'>
             <div className='flex flex-col items-center min-h-screen'>
                 <h1 className='text-xl my-5 font-semibold'>Product</h1>
                 <form onSubmit={handleSubmit} className='w-96 shadow-md p-5 rounded-md'>
@@ -99,7 +100,7 @@ function EditProduct() {
                     </div>
                 </form>
             </div>
-        </MainTemplate>
+        </MainTemplateSeller>
     )
 }
 

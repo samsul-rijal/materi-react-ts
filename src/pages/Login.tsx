@@ -17,7 +17,7 @@ function Login() {
     const [isLoading, setIsloading] = useState(false)
 
     const navigate = useNavigate()
-    const { dispatch, isLogin } = useAuth()
+    const { dispatch } = useAuth()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({
@@ -52,6 +52,9 @@ function Login() {
 
                 setIsloading(false)
                 toast.success('login berhasil!')
+                if(response.data.data.role === 'seller'){
+                    return navigate('/seller/dashboard')
+                }
                 navigate('/')
             }
             
