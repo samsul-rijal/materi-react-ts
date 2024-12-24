@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-color: rgb(231, 230, 230);
+}
+
 .active {
     color: orange;
+}
+
+.icon-active {
+    color: white;
+}
+
+.active-sidebar {
+    background-color: blue;
+    color: white;
+}
+.active-sidebar:hover {
+    color: black;
 }

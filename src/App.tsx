@@ -9,6 +9,12 @@ import TodoApp from './pages/TodoApp';
 import User from './pages/User';
 import { useVerifyToken } from './hooks/useVerifyToken';
 import { useEffect } from 'react';
+import AddProduct from './pages/AddProduct';
+import Products from './pages/Products';
+import EditProduct from './pages/EditProduct';
+import SellerRoute from './components/SellerRoute';
+import ProductSeller from './pages/admins/ProductSeller';
+import Dashboard from './pages/admins/Dashboard';
 
 function App(){
 
@@ -32,6 +38,15 @@ function App(){
           <Route path="/contact" element={<Contact />} />
           <Route path="/todo-app" element={<TodoApp />} />
           <Route path="/users" element={<User />} />
+          <Route path="/products" element={<Products />} />
+          
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+          <Route path="/add-product" element={<AddProduct />} />
+
+          <Route path="/seller" element={<SellerRoute />} >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="product" element={<ProductSeller />} />
+          </Route>
         </Route>
 
       </Routes>

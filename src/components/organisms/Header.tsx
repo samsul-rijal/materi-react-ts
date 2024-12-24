@@ -14,7 +14,7 @@ const Header = () => {
     }
 
     return(
-        <div className={`flex justify-between px-3`}>
+        <div className={`flex justify-between items-center px-3 h-16 bg-white mb-10 fixed top-0 z-50 w-full`}>
             <h1>Header</h1>
             <div className="flex gap-3">
                 {
@@ -48,6 +48,9 @@ const Header = () => {
                             </li>
                             <li>
                                 <NavLink to="/users">User List</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/products">Products</NavLink>
                             </li>
                         </>
                     
